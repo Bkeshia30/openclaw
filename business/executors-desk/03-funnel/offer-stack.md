@@ -1,0 +1,24 @@
+# Offer stack
+
+One core product, one bump, one upsell, one downsell. Everything is a PDF or a Google Sheet. Nothing requires you to be present.
+
+| Step | Product | Price | Format | Where it lives | Purpose |
+|---|---|---|---|---|---|
+| Lead magnet | **The First 72 Hours** checklist | Free | 1-page PDF (`02-product/pdf/The-First-72-Hours-Checklist.pdf`) | Opt-in page `/72` | Capture the email in the first week, when the buyer is searching at night. |
+| Core | **The First 90 Days: An Executor's Working Notebook** | $27 | 30-page PDF (`02-product/pdf/The-First-90-Days-Executors-Working-Notebook.pdf`) | Sales page `/notebook`, Etsy at $19.50 | The tripwire. Priced under the "I'll just buy it" threshold for a stressed 55-year-old. |
+| Order bump | **Scripts & Letters Pack** | $9 | 6-page PDF (`02-product/pdf/Executor-Scripts-and-Letters-Pack.pdf`) | Checkbox on the checkout page | Raises average order value with no extra decision. Expected take rate 30 to 40%. |
+| Upsell (one-time offer after purchase) | **The Estate Ledger** | $37 | Google Sheets template (inventory, running accounting, distribution schedule, receipts log, final accounting export) plus a 12-minute walkthrough video | Post-purchase page `/ledger-offer` | Covers months four to sixteen. The notebook deliberately ends at day 90 and names the ledger on its last page. |
+| Downsell | The Estate Ledger without the video | $19 | Same sheet | Shown only if the $37 is declined | Recovers 10 to 15% of declines. |
+| Later (month 3+) | **State Addendum** | $12 each | 2-page PDFs, one per state, the 15 largest states first | Email offer 14 days after purchase | Built from the state quick-reference; sold only once the core is proven. |
+
+## Why $27 and not $17 or $47
+- $17 reads as a printable. $47 triggers comparison shopping with Nolo's book. $27 is the standard tripwire price for a reason: it converts cold traffic at 2 to 4% when the page is right, and it is under the amount most people will spend without consulting a spouse.
+- The Etsy price is lower ($19.50) because Etsy buyers compare against $9 checklists, Etsy's fees are lower than paid-traffic costs, and Etsy is a discovery channel that feeds the list through the link on the notebook's last page.
+
+## Guarantee
+30 days, no questions, full refund, and they keep the file. State it plainly on the sales page. Refund rates on grief-adjacent products run low because buyers are not shopping recreationally.
+
+## What still needs to be built
+- The Estate Ledger Google Sheet (spec in `03-funnel/estate-ledger-spec.md`). Budget: one working day.
+- A 12-minute screen recording walking through the ledger. Loom or OBS. No face required.
+- Mockup images for Etsy and the sales page: use the rendered PDF pages on a plain desk photo; do not use 3D "ebook cover" mockups, they read as generic.

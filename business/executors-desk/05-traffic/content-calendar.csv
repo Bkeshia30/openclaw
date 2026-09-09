@@ -1,0 +1,103 @@
+date,channel,type,item,destination,how it runs
+2026-09-21,pinterest,pin,The first 72 hours after a parent dies: what cannot wait,/72,auto (n8n: pin-scheduler)
+2026-09-22,pinterest,pin,Order more death certificates than you think you need,/72,auto (n8n: pin-scheduler)
+2026-09-23,pinterest,pin,12 things not to do in the first month as executor,/72,auto (n8n: pin-scheduler)
+2026-09-24,pinterest,pin,"What ""personally liable"" actually means for an executor",/blog,auto (n8n: pin-scheduler)
+2026-09-25,pinterest,pin,Do you need probate? Sort everything into three piles,/72,auto (n8n: pin-scheduler)
+2026-09-26,pinterest,pin,"What Letters Testamentary are, and why banks won't talk to you without them",/72,auto (n8n: pin-scheduler)
+2026-09-21,blog,article,A1 What to do when a parent dies (publish),/blog,"auto-draft, owner approves (n8n: article-drafter)"
+2026-09-21,etsy,listing check,renew tags/photos if sales < 3 in 30d,etsy,auto (openclaw cron: weekly-etsy-check)
+2026-09-27,analytics,weekly report,KPI email to owner,-,auto (n8n: weekly-report)
+2026-09-21,email,sequence,Nurture E0-E4 live,-,one-time setup
+2026-09-21,email,sequence,Onboarding E0-E3 live,-,one-time setup
+2026-09-21,email,sequence,Ledger pitch live,-,one-time setup
+2026-09-21,email,sequence,Abandoned checkout live,-,one-time setup
+2026-09-28,pinterest,pin,The four things to do the day you're appointed executor,/72,auto (n8n: pin-scheduler)
+2026-09-29,pinterest,pin,How to notify credit bureaus of a death (one letter is enough),etsy,auto (n8n: pin-scheduler)
+2026-09-30,pinterest,pin,The Social Security payment that gets clawed back,/72,auto (n8n: pin-scheduler)
+2026-10-01,pinterest,pin,Keep the phone line on: it holds every security code,/72,auto (n8n: pin-scheduler)
+2026-10-02,pinterest,pin,The tax return is the map to every account,/72,auto (n8n: pin-scheduler)
+2026-10-03,pinterest,pin,What to say when a sibling wants their share now,/72,auto (n8n: pin-scheduler)
+2026-09-28,blog,article,A2 Executor duties in order (publish),/blog,"auto-draft, owner approves (n8n: article-drafter)"
+2026-09-28,etsy,listing check,renew tags/photos if sales < 3 in 30d,etsy,auto (openclaw cron: weekly-etsy-check)
+2026-10-04,analytics,weekly report,KPI email to owner,-,auto (n8n: weekly-report)
+2026-09-28,google ads,launch,Search campaign $15/day,/72,"manual launch, auto rules after"
+2026-10-05,pinterest,pin,Five fair ways to divide a parent's belongings,/72,auto (n8n: pin-scheduler)
+2026-10-06,pinterest,pin,"The monthly update email that ends ""what's taking so long""",/blog,auto (n8n: pin-scheduler)
+2026-10-07,pinterest,pin,The empty house: the 30-day insurance problem,/72,auto (n8n: pin-scheduler)
+2026-10-08,pinterest,pin,Photograph every room before anyone visits,/72,auto (n8n: pin-scheduler)
+2026-10-09,pinterest,pin,Are children responsible for a parent's debts? Usually not,/72,auto (n8n: pin-scheduler)
+2026-10-10,pinterest,pin,What to say to a debt collector calling about a parent's account,etsy,auto (n8n: pin-scheduler)
+2026-10-05,blog,article,A3 Executor personal liability (publish),/blog,"auto-draft, owner approves (n8n: article-drafter)"
+2026-10-05,etsy,listing check,renew tags/photos if sales < 3 in 30d,etsy,auto (openclaw cron: weekly-etsy-check)
+2026-10-11,analytics,weekly report,KPI email to owner,-,auto (n8n: weekly-report)
+2026-10-12,pinterest,pin,Four tax returns an executor should know about,/72,auto (n8n: pin-scheduler)
+2026-10-13,pinterest,pin,"Form 1310, Form 56, Form 1041: what they are in plain English",/72,auto (n8n: pin-scheduler)
+2026-10-14,pinterest,pin,Small estate affidavit: the shortcut most families qualify for,/72,auto (n8n: pin-scheduler)
+2026-10-15,pinterest,pin,How to open an estate bank account (EIN first),/72,auto (n8n: pin-scheduler)
+2026-10-16,pinterest,pin,Date-of-death values and why the appraisal matters twice,/72,auto (n8n: pin-scheduler)
+2026-10-17,pinterest,pin,"Executor expense log: no receipt, no reimbursement",/blog,auto (n8n: pin-scheduler)
+2026-10-12,blog,article,B1,/blog,"auto-draft, owner approves (n8n: article-drafter)"
+2026-10-12,etsy,listing check,renew tags/photos if sales < 3 in 30d,etsy,auto (openclaw cron: weekly-etsy-check)
+2026-10-18,analytics,weekly report,KPI email to owner,-,auto (n8n: weekly-report)
+2026-10-12,meta ads,launch,"8 creatives, $20/day, optimize for lead",/72,"manual launch, auto rules after"
+2026-10-19,pinterest,pin,Can an executor get paid? Fees vs. reimbursement,/72,auto (n8n: pin-scheduler)
+2026-10-20,pinterest,pin,"When you need a probate lawyer, and when you don't",/72,auto (n8n: pin-scheduler)
+2026-10-21,pinterest,pin,Eight questions for the first call with a probate attorney,/72,auto (n8n: pin-scheduler)
+2026-10-22,pinterest,pin,"How probate lawyers charge: hourly, flat, or percentage",etsy,auto (n8n: pin-scheduler)
+2026-10-23,pinterest,pin,Getting into a parent's iPhone: Apple Legacy Contact,/72,auto (n8n: pin-scheduler)
+2026-10-24,pinterest,pin,"What happens to a parent's Facebook, Gmail and photos",/72,auto (n8n: pin-scheduler)
+2026-10-19,blog,article,B2,/blog,"auto-draft, owner approves (n8n: article-drafter)"
+2026-10-19,etsy,listing check,renew tags/photos if sales < 3 in 30d,etsy,auto (openclaw cron: weekly-etsy-check)
+2026-10-25,analytics,weekly report,KPI email to owner,-,auto (n8n: weekly-report)
+2026-10-26,pinterest,pin,Mail after a death: what the post office actually requires,/72,auto (n8n: pin-scheduler)
+2026-10-27,pinterest,pin,The call log every executor should keep,/72,auto (n8n: pin-scheduler)
+2026-10-28,pinterest,pin,"Who to notify after a death, and what each one wants",/72,auto (n8n: pin-scheduler)
+2026-10-29,pinterest,pin,Executor burnout hits around week six. Plan for it,/blog,auto (n8n: pin-scheduler)
+2026-10-30,pinterest,pin,Weekly 15-minute executor check-in,/72,auto (n8n: pin-scheduler)
+2026-10-31,pinterest,pin,Executor vs. administrator vs. personal representative,/72,auto (n8n: pin-scheduler)
+2026-10-26,blog,article,B3,/blog,"auto-draft, owner approves (n8n: article-drafter)"
+2026-10-26,etsy,listing check,renew tags/photos if sales < 3 in 30d,etsy,auto (openclaw cron: weekly-etsy-check)
+2026-11-01,analytics,weekly report,KPI email to owner,-,auto (n8n: weekly-report)
+2026-11-02,pinterest,pin,My parent had a trust. Do I still need to do this?,/72,auto (n8n: pin-scheduler)
+2026-11-03,pinterest,pin,Notice to creditors: what it is and why the date matters,etsy,auto (n8n: pin-scheduler)
+2026-11-04,pinterest,pin,How to dispute a creditor's claim against an estate,/72,auto (n8n: pin-scheduler)
+2026-11-05,pinterest,pin,Unclaimed money after a death: three free places to look,/72,auto (n8n: pin-scheduler)
+2026-11-06,pinterest,pin,Life insurance after a death: the claim letter that works,/72,auto (n8n: pin-scheduler)
+2026-11-07,pinterest,pin,The NAIC locator finds forgotten life insurance policies,/72,auto (n8n: pin-scheduler)
+2026-11-02,blog,article,B4,/blog,"auto-draft, owner approves (n8n: article-drafter)"
+2026-11-02,etsy,listing check,renew tags/photos if sales < 3 in 30d,etsy,auto (openclaw cron: weekly-etsy-check)
+2026-11-08,analytics,weekly report,KPI email to owner,-,auto (n8n: weekly-report)
+2026-11-09,pinterest,pin,What to do with a parent's car before anyone drives it,/72,auto (n8n: pin-scheduler)
+2026-11-10,pinterest,pin,Selling a deceased parent's house: appraise first,/blog,auto (n8n: pin-scheduler)
+2026-11-11,pinterest,pin,"Firearms, medication and cash: secure and log them first",/72,auto (n8n: pin-scheduler)
+2026-11-12,pinterest,pin,Settling a parent's estate from another state,/72,auto (n8n: pin-scheduler)
+2026-11-13,pinterest,pin,Ask a neighbor to watch the house: the note to leave,/72,auto (n8n: pin-scheduler)
+2026-11-14,pinterest,pin,"The pension office call, scripted",etsy,auto (n8n: pin-scheduler)
+2026-11-09,blog,article,B5,/blog,"auto-draft, owner approves (n8n: article-drafter)"
+2026-11-09,etsy,listing check,renew tags/photos if sales < 3 in 30d,etsy,auto (openclaw cron: weekly-etsy-check)
+2026-11-15,analytics,weekly report,KPI email to owner,-,auto (n8n: weekly-report)
+2026-11-16,pinterest,pin,"The DMV call for a deceased parent's vehicle, scripted",/72,auto (n8n: pin-scheduler)
+2026-11-17,pinterest,pin,What to say to the hospital billing office,/72,auto (n8n: pin-scheduler)
+2026-11-18,pinterest,pin,Medicaid estate recovery: don't ignore the letter,/72,auto (n8n: pin-scheduler)
+2026-11-19,pinterest,pin,Veteran parent? Tell the funeral home first,/72,auto (n8n: pin-scheduler)
+2026-11-20,pinterest,pin,Prepaid funeral plans are common and often forgotten,/72,auto (n8n: pin-scheduler)
+2026-11-21,pinterest,pin,Executor deadline calendar for the first 90 days,/blog,auto (n8n: pin-scheduler)
+2026-11-16,blog,article,B6,/blog,"auto-draft, owner approves (n8n: article-drafter)"
+2026-11-16,etsy,listing check,renew tags/photos if sales < 3 in 30d,etsy,auto (openclaw cron: weekly-etsy-check)
+2026-11-22,analytics,weekly report,KPI email to owner,-,auto (n8n: weekly-report)
+2026-11-23,pinterest,pin,"The ""tape it to the fridge"" list for new executors",/72,auto (n8n: pin-scheduler)
+2026-11-24,pinterest,pin,What a probate clerk will and won't tell you (call them),/72,auto (n8n: pin-scheduler)
+2026-11-25,pinterest,pin,Inventory of assets: what to list and where to find values,/72,auto (n8n: pin-scheduler)
+2026-11-26,pinterest,pin,Inventory of debts: secured vs. unsecured and why it matters,etsy,auto (n8n: pin-scheduler)
+2026-11-27,pinterest,pin,A monthly update template for beneficiaries,/72,auto (n8n: pin-scheduler)
+2026-11-28,pinterest,pin,The First 90 Days: an executor's working notebook,/72,auto (n8n: pin-scheduler)
+2026-11-23,blog,article,B7,/blog,"auto-draft, owner approves (n8n: article-drafter)"
+2026-11-23,etsy,listing check,renew tags/photos if sales < 3 in 30d,etsy,auto (openclaw cron: weekly-etsy-check)
+2026-11-29,analytics,weekly report,KPI email to owner,-,auto (n8n: weekly-report)
+2026-11-30,blog,article,B8,/blog,"auto-draft, owner approves (n8n: article-drafter)"
+2026-11-30,etsy,listing check,renew tags/photos if sales < 3 in 30d,etsy,auto (openclaw cron: weekly-etsy-check)
+2026-12-06,analytics,weekly report,KPI email to owner,-,auto (n8n: weekly-report)
+2026-12-07,blog,article,B9,/blog,"auto-draft, owner approves (n8n: article-drafter)"
+2026-12-07,etsy,listing check,renew tags/photos if sales < 3 in 30d,etsy,auto (openclaw cron: weekly-etsy-check)
+2026-12-13,analytics,weekly report,KPI email to owner,-,auto (n8n: weekly-report)

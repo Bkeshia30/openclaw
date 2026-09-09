@@ -1,0 +1,65 @@
+/* The Executor's Desk — print theme. Letter size, ink-light, one accent. */
+@page { size: Letter; margin: 0.65in 0.8in 0.7in 0.8in; }
+:root{
+  --ink:#1d1d1b; --muted:#5c5a55; --rule:#c9c5bb; --accent:#2f4f4f; --accent-soft:#e7ecea; --paper:#ffffff; --line:#a9a49a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--paper);color:var(--ink)}
+body{font-family:"Bitstream Charter","Charter","Liberation Serif",Georgia,serif;font-size:10.3pt;line-height:1.38;}
+h1,h2,h3,h4{font-family:"Liberation Sans","Helvetica Neue",Arial,sans-serif;letter-spacing:-0.01em;color:var(--ink);margin:0}
+h1{font-size:26pt;line-height:1.1;font-weight:700}
+h2{font-size:16pt;line-height:1.15;font-weight:700;margin:0 0 8pt 0;padding-bottom:5pt;border-bottom:2px solid var(--accent)}
+h3{font-size:12pt;font-weight:700;margin:11pt 0 3pt 0}
+h4{font-size:10.5pt;font-weight:700;margin:10pt 0 2pt 0;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+p{margin:0 0 8pt 0}
+small,.small{font-size:9pt;color:var(--muted)}
+.page{page-break-after:always;display:flex;flex-direction:column;min-height:10.3in}
+.page>*{flex:0 0 auto}
+tr,.script,.letter,.note,.warn,.box,.field{page-break-inside:avoid}
+h2,h3,h4{page-break-after:avoid}
+table{page-break-inside:auto}
+thead{display:table-header-group}
+.page:last-child{page-break-after:auto}
+.kicker{font-family:"Liberation Sans",Arial,sans-serif;font-size:9pt;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);margin-bottom:6pt}
+.lead{font-size:11.6pt;line-height:1.38}
+.note{border-left:3px solid var(--accent);background:var(--accent-soft);padding:8pt 10pt;margin:10pt 0;font-size:10.2pt}
+.warn{border-left:3px solid #8a2b2b;background:#f5e9e9;padding:8pt 10pt;margin:10pt 0;font-size:10.2pt}
+.aside{font-size:9.6pt;color:var(--muted);font-style:italic;margin:6pt 0 10pt 0}
+ul,ol{margin:0 0 8pt 0;padding-left:18pt}
+li{margin:0 0 3pt 0}
+/* checklist */
+.check{list-style:none;padding-left:0;margin:6pt 0 10pt 0}
+.check li{position:relative;padding-left:20pt;margin:0 0 4pt 0;line-height:1.32}
+.check li:before{content:"";position:absolute;left:0;top:2pt;width:11pt;height:11pt;border:1.2px solid var(--ink);border-radius:2pt}
+.check li .why{display:block;font-size:9.4pt;color:var(--muted)}
+/* writing lines */
+.lines{margin:6pt 0 10pt 0}
+.lines div{border-bottom:1px solid var(--line);height:20pt}
+.lines.tight div{height:18pt}
+/* field */
+.field{display:flex;gap:8pt;align-items:flex-end;margin:0 0 9pt 0}
+.field label{font-family:"Liberation Sans",Arial,sans-serif;font-size:8.5pt;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);white-space:nowrap}
+.field span{flex:1;border-bottom:1px solid var(--line);height:16pt}
+/* tables */
+table{border-collapse:collapse;width:100%;margin:5pt 0 10pt 0;font-size:9.3pt}
+th{font-family:"Liberation Sans",Arial,sans-serif;font-size:8.5pt;text-transform:uppercase;letter-spacing:.05em;text-align:left;color:var(--muted);border-bottom:1.5px solid var(--ink);padding:4pt 5pt}
+td{border-bottom:1px solid var(--rule);padding:4pt 5pt;vertical-align:top}
+table.fill td{height:16pt}
+table.fill.tall td{height:21pt}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18pt}
+.cover{min-height:10.3in;display:flex;flex-direction:column;justify-content:space-between}
+.cover .title{font-size:34pt;line-height:1.05;font-weight:700;font-family:"Liberation Sans",Arial,sans-serif;margin:8pt 0}
+.cover .sub{font-size:14pt;color:var(--muted);max-width:5.4in}
+.cover .brand{font-family:"Liberation Sans",Arial,sans-serif;font-size:9.5pt;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.rule{border:0;border-top:1px solid var(--rule);margin:12pt 0}
+.foot{margin-top:auto;padding-top:6pt;font-size:8pt;color:var(--muted);display:flex;justify-content:space-between;border-top:1px solid var(--rule);padding-top:4pt;font-family:"Liberation Sans",Arial,sans-serif}
+.script{background:#faf8f3;border:1px solid var(--rule);padding:7pt 10pt;margin:6pt 0 9pt 0;font-size:9.8pt}
+.script .who{font-family:"Liberation Sans",Arial,sans-serif;font-size:8.5pt;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:3pt}
+.letter{border:1px solid var(--rule);padding:11pt 14pt;margin:6pt 0 10pt 0;font-size:9.8pt;line-height:1.45}
+.letter .blank{display:inline-block;min-width:1.4in;border-bottom:1px solid var(--line)}
+.big-num{font-family:"Liberation Sans",Arial,sans-serif;font-size:28pt;font-weight:700;color:var(--accent);line-height:1}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12pt}
+.box{border:1px solid var(--rule);padding:8pt 10pt;border-radius:3pt}
+.toc li{margin:0 0 5pt 0}
+.toc .n{display:inline-block;width:26pt;color:var(--accent);font-family:"Liberation Sans",Arial,sans-serif;font-weight:700}
+.stamp{display:inline-block;border:1.5px solid var(--accent);color:var(--accent);padding:2pt 6pt;font-family:"Liberation Sans",Arial,sans-serif;font-size:8.5pt;letter-spacing:.08em;text-transform:uppercase;border-radius:2pt}

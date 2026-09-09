@@ -1,0 +1,18 @@
+{
+  "name": "Executors Desk - Refund handler",
+  "nodes": [
+    {"parameters": {"events": ["charge.refunded"]}, "name": "Stripe refund webhook", "type": "n8n-nodes-base.stripeTrigger", "typeVersion": 1, "position": [0, 0]},
+    {"parameters": {"jsCode": "const c = $json.data.object;\nreturn [{ json: { email: c.billing_details?.email || c.receipt_email, amount: c.amount_refunded/100, charge: c.id, reason: c.refunds?.data?.[0]?.reason || 'requested_by_customer' } }];"}, "name": "Extract", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [220, 0]},
+    {"parameters": {"url": "https://api.systeme.io/api/contacts", "method": "GET", "sendHeaders": true, "headerParameters": {"parameters": [{"name": "X-API-Key", "value": "={{ $env.SYSTEME_API_KEY }}"}]}, "sendQuery": true, "queryParameters": {"parameters": [{"name": "email", "value": "={{ $json.email }}"}]}, "options": {}}, "name": "Find contact", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "position": [440, 0]},
+    {"parameters": {"url": "=https://api.systeme.io/api/contacts/{{ $json.items[0].id }}/tags", "method": "POST", "sendHeaders": true, "headerParameters": {"parameters": [{"name": "X-API-Key", "value": "={{ $env.SYSTEME_API_KEY }}"}, {"name": "content-type", "value": "application/json"}]}, "sendBody": true, "specifyBody": "json", "jsonBody": "={{ JSON.stringify({ tagId: Number($env.SYSTEME_TAG_REFUNDED) }) }}", "options": {}}, "name": "Tag refunded", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "position": [660, 0]},
+    {"parameters": {"operation": "append", "documentId": "={{ $env.DASHBOARD_SHEET_ID }}", "sheetName": "refunds", "columns": {"mappingMode": "defineBelow", "value": {"date": "={{ $now.toISO() }}", "email": "={{ $('Extract').item.json.email }}", "amount": "={{ $('Extract').item.json.amount }}", "reason": "={{ $('Extract').item.json.reason }}"}}, "options": {}}, "name": "Log refund", "type": "n8n-nodes-base.googleSheets", "typeVersion": 4.5, "position": [880, 0]}
+  ],
+  "connections": {
+    "Stripe refund webhook": {"main": [[{"node": "Extract", "type": "main", "index": 0}]]},
+    "Extract": {"main": [[{"node": "Find contact", "type": "main", "index": 0}]]},
+    "Find contact": {"main": [[{"node": "Tag refunded", "type": "main", "index": 0}]]},
+    "Tag refunded": {"main": [[{"node": "Log refund", "type": "main", "index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1"},
+  "meta": {"notes": "systeme.io's own rule can also do the tag; this workflow adds the log row and a place to hook the 'refund reasons' weekly read."}
+}
