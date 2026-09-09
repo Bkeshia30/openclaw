@@ -6,6 +6,7 @@ Upload to Google Drive and open with Google Sheets; formulas, dropdowns and cond
 Formulas only, no macros. Run: python3 build_estate_ledger.py
 """
 import os
+from datetime import date
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side, Protection
 from openpyxl.worksheet.datavalidation import DataValidation
@@ -88,8 +89,9 @@ lines = [
  "12. Nothing here is legal or tax advice. Your CPA will want the Final accounting tab and the Ledger tab; send both.",
 ]
 for i, l in enumerate(lines, 5):
-    ws.cell(row=i, column=1, value=l).font = B
+    c = ws.cell(row=i, column=1, value=l); c.font = B; c.alignment = Alignment(wrap_text=True, vertical="top")
     ws.merge_cells(start_row=i, start_column=1, end_row=i, end_column=2)
+    ws.row_dimensions[i].height = 30
 r = 19
 ws.cell(row=r, column=1, value="ESTATE DETAILS").font = K
 details = [("Decedent's full name", None), ("Date of death", DATE), ("Estate EIN", None), ("Court and case number", None),
@@ -166,9 +168,9 @@ for r in range(L0, L1 + 1):
 dv_list(led, f"C{L0}:C{L1}", LCATS)
 dv_list(led, f"G{L0}:G{L1}", ["Yes", "No"])
 led.conditional_formatting.add(f"A{L0}:H{L1}", FormulaRule(formula=[f'AND($E{L0}>0,$G{L0}<>"Yes")'], fill=PatternFill("solid", fgColor=AMBER)))
-example(led, L0, {1: "2026-04-02", 2: "First County Bank (transfer of sole-name checking)", 3: "transfer in", 4: 12480.22, 7: "Yes", 8: "Closing statement attached"}, [])
-example(led, L0 + 1, {1: "2026-04-05", 2: "Dayton Daily News", 3: "administration", 5: 145.00, 7: "Yes", 8: "Notice to creditors, 3 runs"}, [])
-example(led, L0 + 2, {1: "2026-04-09", 2: "Reimbursement to executor: death certificates", 3: "reimbursement to executor", 5: 187.50, 7: "No", 8: "Receipt in folder, not yet scanned"}, [])
+example(led, L0, {1: date(2026, 4, 2), 2: "First County Bank (transfer of sole-name checking)", 3: "transfer in", 4: 12480.22, 7: "Yes", 8: "Closing statement attached"}, [])
+example(led, L0 + 1, {1: date(2026, 4, 5), 2: "Dayton Daily News", 3: "administration", 5: 145.00, 7: "Yes", 8: "Notice to creditors, 3 runs"}, [])
+example(led, L0 + 2, {1: date(2026, 4, 9), 2: "Reimbursement to executor: death certificates", 3: "reimbursement to executor", 5: 187.50, 7: "No", 8: "Receipt in folder, not yet scanned"}, [])
 for r in range(L0, L0 + 3): led.cell(row=r, column=1).number_format = DATE
 led.freeze_panes = f"A{L0}"
 led.protection.sheet = True; led.protection.formatCells = False
@@ -177,7 +179,7 @@ led.protection.sheet = True; led.protection.formatCells = False
 cl = wb.create_sheet("Claims")
 title(cl, "Claims", "Every creditor claim as it arrives. Do not pay until the window closes and the estate is known to be solvent.")
 cl.cell(row=5, column=1, value="Creditor window closes on").font = BB
-c = cl.cell(row=5, column=2, value="='Start here'!B25"); c.number_format = DATE; c.font = BB
+c = cl.cell(row=5, column=2, value="=IF('Start here'!B25=\"\",\"\",'Start here'!B25)"); c.number_format = DATE; c.font = BB
 cl.cell(row=5, column=3, value="(set on the Start here tab; rows received after this date turn red)").font = M
 CHR = 11; C0 = CHR + 1; C1 = CHR + N
 for i, (lab, f) in enumerate([("Total claimed", f"=SUM($C${C0}:$C${C1})"), ("Total allowed", f"=SUM($G${C0}:$G${C1})"),
@@ -195,9 +197,9 @@ for r in range(C0, C1 + 1):
 dv_list(cl, f"D{C0}:D{C1}", ["Yes", "No"]); dv_list(cl, f"E{C0}:E{C1}", ["Yes", "No"])
 dv_list(cl, f"F{C0}:F{C1}", ["pending", "allowed", "disputed", "rejected", "paid"])
 cl.conditional_formatting.add(f"A{C0}:I{C1}", FormulaRule(formula=[f'AND($B{C0}<>"",$B$5<>"",$B{C0}>$B$5)'], fill=PatternFill("solid", fgColor=RED)))
-example(cl, C0, {1: "Capital One (card ending 2210)", 2: "2026-04-20", 3: 3412.77, 4: "No", 5: "Yes", 6: "allowed", 7: 3412.77, 9: "Statement matches date-of-death balance"}, [])
-example(cl, C0 + 1, {1: "Miami Valley Hospital", 2: "2026-05-02", 3: 8900.00, 4: "No", 5: "No", 6: "disputed", 7: 0, 9: "Itemized bill requested 2026-05-03; Medicare not yet billed"}, [])
-example(cl, C0 + 2, {1: "Late claim: Acme Collections", 2: "2026-09-30", 3: 640.00, 4: "No", 5: "No", 6: "rejected", 7: 0, 9: "Received after window; rejection letter sent"}, [])
+example(cl, C0, {1: "Capital One (card ending 2210)", 2: date(2026, 4, 20), 3: 3412.77, 4: "No", 5: "Yes", 6: "allowed", 7: 3412.77, 9: "Statement matches date-of-death balance"}, [])
+example(cl, C0 + 1, {1: "Miami Valley Hospital", 2: date(2026, 5, 2), 3: 8900.00, 4: "No", 5: "No", 6: "disputed", 7: 0, 9: "Itemized bill requested 2026-05-03; Medicare not yet billed"}, [])
+example(cl, C0 + 2, {1: "Late claim: Acme Collections", 2: date(2026, 9, 30), 3: 640.00, 4: "No", 5: "No", 6: "rejected", 7: 0, 9: "Received after window; rejection letter sent"}, [])
 for r in range(C0, C0 + 3): cl.cell(row=r, column=2).number_format = DATE
 cl.freeze_panes = f"A{C0}"
 cl.protection.sheet = True; cl.protection.formatCells = False
@@ -243,8 +245,9 @@ di.protection.sheet = True; di.protection.formatCells = False
 fa = wb.create_sheet("Final accounting")
 title(fa, "Final accounting", "Print this page. Every number pulls from the other tabs.")
 fa.column_dimensions["A"].width = 52; fa.column_dimensions["B"].width = 20; fa.column_dimensions["C"].width = 20
-fa["A5"] = "Estate of"; fa["B5"] = "='Start here'!B20"; fa["A6"] = "Date of death"; fa["B6"] = "='Start here'!B21"; fa["B6"].number_format = DATE
-fa["A7"] = "Court and case number"; fa["B7"] = "='Start here'!B23"; fa["A8"] = "Personal representative"; fa["B8"] = "='Start here'!B24"
+def blank_safe(ref): return f"=IF({ref}=\"\",\"\",{ref})"
+fa["A5"] = "Estate of"; fa["B5"] = blank_safe("'Start here'!B20"); fa["A6"] = "Date of death"; fa["B6"] = blank_safe("'Start here'!B21"); fa["B6"].number_format = DATE
+fa["A7"] = "Court and case number"; fa["B7"] = blank_safe("'Start here'!B23"); fa["A8"] = "Personal representative"; fa["B8"] = blank_safe("'Start here'!B24")
 for r in range(5, 9): fa.cell(row=r, column=1).font = B; fa.cell(row=r, column=2).font = B
 def sec(row, text):
     c = fa.cell(row=row, column=1, value=text); c.font = H; c.fill = hdr_fill

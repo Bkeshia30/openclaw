@@ -10,6 +10,6 @@ out = os.path.join(root, "05-traffic/pins-queue.csv")
 with open(out, "w", newline="") as f:
     w = csv.writer(f); w.writerow(["id","title","board","destination","fact","why","posted_at","pin_id"])
     for i, t in enumerate(titles, 1):
-        dest = "etsy" if i % 10 == 0 else ("/blog" if i % 10 == 5 else "/72")
+        dest = "etsy" if (i - 1) % 10 == 7 else ("/blog" if (i - 1) % 10 == 3 else "/72")
         w.writerow([i, t, boards[(i-1) % len(boards)], dest, "", "", "", ""])
 print("wrote", out, len(titles), "pins")

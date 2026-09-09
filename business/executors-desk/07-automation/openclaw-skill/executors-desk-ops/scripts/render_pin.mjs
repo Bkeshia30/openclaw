@@ -3,7 +3,12 @@
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || "playwright");
-const args = Object.fromEntries(process.argv.slice(2).join(" ").split(" --").filter(Boolean).map(s => { const [k, ...v] = s.replace(/^--/, "").split(" "); return [k, v.join(" ").replace(/^"|"$/g, "")]; }));
+const args = {};
+for (let i = 2; i < process.argv.length; i++) {
+  const a = process.argv[i];
+  if (a.startsWith("--")) { args[a.slice(2)] = process.argv[i + 1] && !process.argv[i + 1].startsWith("--") ? process.argv[++i] : "true"; }
+}
+const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const title = args.title || "The first 72 hours after a parent dies";
 const kicker = args.kicker || "The Executor's Desk";
 const footer = args.footer || "Free 72-hour checklist · theexecutorsdesk.com/72";
@@ -13,7 +18,7 @@ body{margin:0;width:1000px;height:1500px;background:#faf8f3;font-family:"Bitstre
 h1{font-family:"Liberation Sans",Arial,sans-serif;font-weight:700;font-size:84px;line-height:1.08;letter-spacing:-.01em;margin:40px 0 0 0}
 .rule{height:6px;width:140px;background:#2f4f4f;margin:48px 0 0 0}
 .f{font-size:30px;color:#5c5a55;border-top:2px solid #c9c5bb;padding-top:28px}
-</style></head><body><div><div class="k">${kicker}</div><h1>${title}</h1><div class="rule"></div></div><div class="f">${footer}</div></body></html>`;
+</style></head><body><div><div class="k">${esc(kicker)}</div><h1>${esc(title)}</h1><div class="rule"></div></div><div class="f">${esc(footer)}</div></body></html>`;
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1000, height: 1500 } });
 await page.setContent(html, { waitUntil: "load" });

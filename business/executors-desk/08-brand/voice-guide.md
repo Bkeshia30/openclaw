@@ -25,7 +25,7 @@ A competent friend who has done this before, sitting at the kitchen table with y
 | passed away | died |
 | loved one | your parent, your mother, your father |
 | navigate the process | do the steps in order |
-| comprehensive guide | 31 pages, in order |
+| comprehensive guide | 30 pages, in order |
 | peace of mind | you will not miss a deadline |
 | leverage | use |
 | utilize | use |

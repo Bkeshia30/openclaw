@@ -17,7 +17,6 @@ p.add_argument("--downsell", type=float, default=0.10, help="downsell take rate 
 p.add_argument("--refund", type=float, default=0.03)
 p.add_argument("--optin-rate", type=float, default=0.35)
 p.add_argument("--email-conv", type=float, default=0.10, help="share of opt-ins who buy within 60 days")
-p.add_argument("--immediate-conv", type=float, default=0.04, help="share of opt-ins who buy on the thank-you page (subset of email-conv)")
 p.add_argument("--cpc", type=float, default=2.0)
 p.add_argument("--daily-spend", type=float, default=15.0)
 p.add_argument("--days", type=int, default=30)

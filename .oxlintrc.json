@@ -24,6 +24,7 @@
   },
   "ignorePatterns": [
     "assets/",
+    "business/",
     "dist/",
     "docs/_layouts/",
     "extensions/",

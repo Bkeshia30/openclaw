@@ -65,7 +65,7 @@ There is a pile of mail on the kitchen table. The house is quiet in a way it nev
 You do not need a consultation yet. You need the order of operations.
 
 ### What this notebook is
-Thirty-one pages, Letter size, designed to be printed and written on or filled in on a tablet. It is built around one idea: the first 90 days have a shape, and if you follow the shape you will not miss the things that cost executors money.
+Thirty pages, Letter size, designed to be printed and written on or filled in on a tablet. It is built around one idea: the first 90 days have a shape, and if you follow the shape you will not miss the things that cost executors money.
 
 **Part One, the first 72 hours.** Ten items. Death certificates, the house, the will, the pets, the paperwork. With the reason beside each, because you will make better calls when you know why.
 

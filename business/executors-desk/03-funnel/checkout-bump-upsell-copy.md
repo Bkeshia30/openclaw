@@ -7,7 +7,7 @@
 
 ### Order bump (checkbox, boxed, above the pay button)
 **Checkbox label:** Add the Scripts & Letters Pack for $9
-**Text:** Twelve more phone scripts and nine more letters for the calls the notebook cannot fit: the brokerage, the pension office, the DMV, the landlord, the hospital billing office, the debt collector who says you owe it, and the sibling who wants the car this weekend. Six pages. Delivered with the notebook.
+**Text:** Thirteen more phone scripts and seven more letters for the calls the notebook cannot fit: the brokerage, the pension office, the DMV, the landlord, the hospital billing office, the debt collector who says you owe it, and the sibling who wants the car this weekend. Six pages. Delivered with the notebook.
 **Micro-line under it:** Bought separately later: $14.
 
 **Pay button:** Pay $27 and download
@@ -59,7 +59,7 @@ Most executors do this in a notes app and a checking-account statement, and then
 Three things worth doing in the next ten minutes:
 1. Print Section 5, "Do not do this yet," and put it where you will see it.
 2. Fill in the death-certificate tracker on page six with what you have already ordered.
-3. Write the county probate court's phone number on page twelve. Calling the clerk is free, and they answer more questions than people expect.
+3. Write the county probate court's phone number on page 11. Calling the clerk is free, and they answer more questions than people expect.
 
 A copy of these links is in your email. If it is not there in five minutes, check spam for help@theexecutorsdesk.com, then reply to any email from us and a human will send it.
 
