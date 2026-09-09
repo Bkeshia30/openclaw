@@ -1,0 +1,100 @@
+{
+  "nurture": [
+    {
+      "email": "Email 0",
+      "timing": "immediately",
+      "subject": "your 72-hour checklist",
+      "body": "{{first_name}},\n\nHere is the checklist: [DOWNLOAD LINK]\n\nPrint it. The ten items are the only things that cannot wait this week. The box at the bottom is the list of things people will push you to do that you should not do yet.\n\nOne thing the checklist cannot fit: order more death certificates than you think you need. Ten to fifteen. Every bank, insurer, brokerage and the DMV wants one, and several keep it. Reordering later takes weeks, and weeks are what you do not have when a creditor window is running.\n\nOver the next ten days I'll send four short emails about what comes after the 72 hours: the week-one list, the thing that makes executors personally liable, how to find every account, and whether you need probate at all. Unsubscribe at the bottom any time.\n\nIf you need the whole sequence now, it is in the notebook the checklist came from: [LINK to /notebook]. $27, and you keep it even if you refund it.\n\n\u2014 [Your name]\nThe Executor's Desk"
+    },
+    {
+      "email": "Email 1",
+      "timing": "day 1",
+      "subject": "the phone is the key",
+      "body": "Before you cancel anything, keep your parent's mobile phone paid for and charged.\n\nNearly every bank, brokerage and utility sends its security codes to that number. Cancel the line and you lose access to every account behind it, and getting it back means notarized letters and weeks of waiting. The same goes for the email address.\n\nWeek-one list, in order:\n1. Call the homeowner's insurer. Most policies treat a house as vacant after 30 to 60 days and then void claims. Ask what they need.\n2. Keep the utilities on. Do not transfer them yet either.\n3. Photograph every room, drawer and the garage before anyone visits. Date-stamped.\n4. Lock away cash, jewelry, firearms, medication, documents. Log what you moved.\n5. Find the last two tax returns. They list every account that paid your parent money. That is your map.\n\nThe notebook has this as a checklist with the reason next to each item, plus the mail log and call log you will need by Wednesday: [LINK]\n\n\u2014 [Your name]"
+    },
+    {
+      "email": "Email 2",
+      "timing": "day 3",
+      "subject": "the two words on the law firm's website",
+      "body": "\"Personally liable.\" You have probably seen it by now.\n\nIt is real, and it is also rarer than the websites make it sound. Executors who end up paying out of their own pocket almost always did one of five things:\n\n1. Paid beneficiaries before the creditor window closed and the taxes were reserved for.\n2. Mixed estate money with their own, even briefly.\n3. Missed a deadline: filing the will, publishing notice to creditors, filing the inventory, the final tax return.\n4. Spent a Social Security or pension deposit that landed after the death. Those get clawed back.\n5. Played favorites: the sibling who cleared the garage first, the friend who got the house cheap.\n\nThe habit that prevents all five: nothing leaves the estate until you can point to a document that says it can. Say that to your brother when he asks about the truck. Say it kindly, and keep saying it.\n\nThe notebook opens with these five, one page each, and the \"do not do this yet\" list that goes on the fridge: [LINK]\n\n\u2014 [Your name]"
+    },
+    {
+      "email": "Email 3",
+      "timing": "day 6",
+      "subject": "you might not need probate",
+      "body": "Every state has a shortcut for modest estates. It is called a small-estate affidavit or a summary procedure, and the limit runs from about $15,000 to over $200,000 depending on the state, usually counting only the things in your parent's name alone with no beneficiary.\n\nTo find out, sort everything into three piles:\nA. Passes by beneficiary designation: life insurance, IRAs, 401(k)s, payable-on-death accounts. Not probate.\nB. Passes by ownership: joint accounts, a house owned with a surviving spouse, anything in a living trust. Not probate.\nC. Everything else. Add this pile up at date-of-death values. That number decides your path.\n\nThen call the probate clerk in the county where your parent lived and ask two questions: what is the small-estate limit this year, and which form. Clerks cannot give legal advice but they answer this every day, and the call is free.\n\nThe notebook walks through the sorting, gives starting figures for the largest states and where to verify any state, and lists the four things to do the day the court appoints you: [LINK]\n\n\u2014 [Your name]"
+    },
+    {
+      "email": "Email 4",
+      "timing": "day 10",
+      "subject": "what the notebook is, and what it is not",
+      "body": "Last email in this series.\n\nThe First 90 Days is a 30-page working notebook: week-by-week checklists with the reason beside each item, seven phone scripts, three letters to copy, ten trackers, the state quick reference, the tax deadline sheet, the monthly email to send siblings, and the page on when you actually need a lawyer.\n\nIt is not legal advice, and it will tell you plainly when you need a lawyer. It is not state-specific, though it tells you where each state's rule lives. And it is not long; it is meant to be printed and written on.\n\n$27. Instant download. Thirty days to refund it, and you keep the file either way.\n\n[LINK]\n\nIf you do not need it, that is fine. You will not hear from me again unless you buy it or reply. If you have a question about the process, reply to this email; a person reads them.\n\n\u2014 [Your name]\nThe Executor's Desk"
+    }
+  ],
+  "onboarding": [
+    {
+      "email": "Email 0",
+      "timing": "immediately (delivery)",
+      "subject": "your notebook, and three things to do tonight",
+      "body": "Here are your files:\n- The First 90 Days (PDF): [LINK]\n- Scripts & Letters Pack (PDF): [LINK, only if purchased]\n- The Estate Ledger: [LINK, only if purchased]\n\nThree things worth ten minutes tonight:\n1. Print Section 5, \"Do not do this yet,\" and put it on the fridge.\n2. Fill in the death-certificate tracker with what you have already ordered.\n3. Write the county probate court's phone number on the state quick-reference page.\n\nReceipt is attached. Reply to this email with any question or correction; I read every one and the notebook is updated from them.\n\n\u2014 [Your name]"
+    },
+    {
+      "email": "Email 1",
+      "timing": "day 2",
+      "subject": "the clerk answers more than you'd think",
+      "body": "The probate clerk's office cannot give legal advice. They will, however, tell you which form to file, the fee, whether your county does informal appointment, the local newspaper for creditor notice, and this year's small-estate limit. Most executors never call because they assume they need a lawyer to ask. Call. It is free, and it is the fastest way to fill in the deadline calendar on page 27.\n\nIf you have already been appointed, the four things to do today are on page 10: EIN, estate account, Form 56, post office."
+    },
+    {
+      "email": "Email 2",
+      "timing": "day 7",
+      "subject": "one page for your siblings",
+      "body": "Page 23 has the monthly update email. Send it on the same date every month whether or not anything happened. \"Nothing changed; the creditor window closes on the 14th\" is a complete update, and it ends the \"what's taking so long\" texts better than any explanation.\n\nIf dividing personal things is going to be the hard part, the five methods on page 24 all work; the one that works best is the one you announce in writing before anyone chooses."
+    },
+    {
+      "email": "Email 3",
+      "timing": "day 30",
+      "subject": "one question",
+      "body": "You have had the notebook a month. If it has helped, would you tell me in one sentence what was most useful? If something was wrong, missing or unclear, tell me that instead; it matters more.\n\nReply to this email. If you would rather leave a review where others can see it: [Etsy or review link].\n\nAnd if you are past day 90 and the ledger stage has arrived, the Estate Ledger is here: [LINK]. $47 now, $37 if you use the code in your original receipt."
+    }
+  ],
+  "ledger_pitch": [
+    {
+      "email": "Email 1",
+      "timing": "day 3",
+      "subject": "what months four to sixteen look like",
+      "body": "Settling an estate takes about 16 months on average. After the first 90 days the job becomes bookkeeping: every dollar in and out of the estate account, categorized, reconciled, and eventually turned into an accounting the beneficiaries or court will accept. The Estate Ledger is the Google Sheet built for that, with the inventory, claims and distribution tabs linked to it. $37 for buyers of the notebook: [LINK]"
+    },
+    {
+      "email": "Email 2",
+      "timing": "day 5",
+      "subject": "the receipts rule",
+      "body": "No receipt, no reimbursement. Beneficiaries can challenge any expense you cannot document, and courts side with them. The Ledger turns every row amber until you tick the receipt box. It is a small thing and it is the thing that keeps executors out of arguments in month fourteen. [LINK]"
+    },
+    {
+      "email": "Email 3",
+      "timing": "day 8",
+      "subject": "last note about the ledger",
+      "body": "If you are keeping the estate's books in a notes app, that is fine for now; you will rebuild it at the end from bank statements. If you would rather not, the Ledger is $37 for another three days, then $47. Either way, this is the last email about it. [LINK]"
+    }
+  ],
+  "abandoned_checkout": [
+    {
+      "email": "Email 1",
+      "timing": "4 hours",
+      "subject": "your notebook is still here",
+      "body": "You opened the order page for The First 90 Days and did not finish. If it was a card problem, the page is here: [LINK]. If you were not sure it was worth $27, the refund is 30 days and you keep the file, so the risk is mine."
+    },
+    {
+      "email": "Email 2",
+      "timing": "24 hours",
+      "subject": "the page most people print first",
+      "body": "Page 8, \"Do not do this yet.\" Twelve things people will pressure you to do in the first month and when each is actually allowed. Buyers tell me it goes on the fridge. It is one of thirty-one pages: [LINK]"
+    },
+    {
+      "email": "Email 3",
+      "timing": "72 hours",
+      "subject": "no more reminders",
+      "body": "This is the last one. The notebook is here if and when it is useful: [LINK]. If you have a question about the process instead, reply and ask; that is free."
+    }
+  ]
+}

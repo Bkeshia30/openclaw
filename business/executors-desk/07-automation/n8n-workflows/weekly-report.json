@@ -1,0 +1,232 @@
+{
+  "name": "Executors Desk - Weekly KPI report",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 18 * * 0"
+            }
+          ]
+        }
+      },
+      "name": "Sunday 18:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.stripe.com/v1/charges",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "stripeApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "created[gte]",
+              "value": "={{ Math.floor($now.minus({days: 7}).toSeconds()) }}"
+            },
+            {
+              "name": "limit",
+              "value": "100"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Stripe charges 7d",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.stripe.com/v1/refunds",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "stripeApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "created[gte]",
+              "value": "={{ Math.floor($now.minus({days: 7}).toSeconds()) }}"
+            },
+            {
+              "name": "limit",
+              "value": "100"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Stripe refunds 7d",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        40
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://analyticsdata.googleapis.com/v1beta/properties/{{ $env.GA4_PROPERTY_ID }}:runReport",
+        "method": "POST",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleAnalyticsOAuth2",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ dateRanges: [{ startDate: '7daysAgo', endDate: 'today' }], dimensions: [{ name: 'eventName' }], metrics: [{ name: 'eventCount' }], dimensionFilter: { filter: { fieldName: 'eventName', inListFilter: { values: ['view_72','lead_72','view_notebook','begin_checkout','purchase'] } } } }) }}",
+        "options": {}
+      },
+      "name": "GA4 events 7d",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const charges = $('Stripe charges 7d').first().json.data || [];\nconst refunds = $('Stripe refunds 7d').first().json.data || [];\nconst ga = ($('GA4 events 7d').first().json.rows || []).reduce((m, r) => { m[r.dimensionValues[0].value] = Number(r.metricValues[0].value); return m; }, {});\nconst paid = charges.filter(c => c.paid && !c.refunded);\nconst orders = paid.length;\nconst revenue = paid.reduce((s, c) => s + c.amount, 0) / 100;\nconst refundAmt = refunds.reduce((s, r) => s + r.amount, 0) / 100;\nconst aov = orders ? revenue / orders : 0;\nconst optinRate = ga.view_72 ? (ga.lead_72 || 0) / ga.view_72 : 0;\nconst refundRate = orders ? refunds.length / orders : 0;\nconst spend = Number($env.WEEKLY_AD_SPEND || 0); // replace with Google Ads / Meta API pulls when connected\nconst flags = [];\nif (optinRate && optinRate < 0.20) flags.push('opt-in rate under 20%: fix the /72 page');\nif (aov && aov < 30) flags.push('AOV under $30: check bump placement');\nif (refundRate > 0.06) flags.push('refund rate over 6%: read the reasons');\nconst text = `Executor's Desk \u2014 week ending ${$now.toFormat('yyyy-LL-dd')}\\n` +\n`Page views /72: ${ga.view_72||0}  Opt-ins: ${ga.lead_72||0}  Opt-in rate: ${(optinRate*100).toFixed(1)}%\\n` +\n`Notebook page views: ${ga.view_notebook||0}  Checkouts started: ${ga.begin_checkout||0}\\n` +\n`Orders: ${orders}  Revenue: $${revenue.toFixed(2)}  AOV: $${aov.toFixed(2)}\\n` +\n`Refunds: ${refunds.length} ($${refundAmt.toFixed(2)})  Refund rate: ${(refundRate*100).toFixed(1)}%\\n` +\n`Ad spend (manual until APIs connected): $${spend.toFixed(2)}  Cost per opt-in: ${ga.lead_72 ? '$'+(spend/ga.lead_72).toFixed(2) : 'n/a'}\\n` +\n(flags.length ? `\\nFlags:\\n- ${flags.join('\\n- ')}` : '\\nNo flags.');\nreturn [{ json: { text, date: $now.toFormat('yyyy-LL-dd'), spend, view_72: ga.view_72||0, lead_72: ga.lead_72||0, orders, aov: Number(aov.toFixed(2)), revenue: Number(revenue.toFixed(2)), refunds: refunds.length } }];"
+      },
+      "name": "Compute KPIs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        40
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": "={{ $env.DASHBOARD_SHEET_ID }}",
+        "sheetName": "weekly",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "date": "={{ $json.date }}",
+            "spend": "={{ $json.spend }}",
+            "view_72": "={{ $json.view_72 }}",
+            "lead_72": "={{ $json.lead_72 }}",
+            "orders": "={{ $json.orders }}",
+            "aov": "={{ $json.aov }}",
+            "revenue": "={{ $json.revenue }}",
+            "refunds": "={{ $json.refunds }}"
+          },
+          "matchingColumns": []
+        },
+        "options": {}
+      },
+      "name": "Append to dashboard",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        720,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $env.OWNER_CHAT_ID }}",
+        "text": "={{ $json.text }}"
+      },
+      "name": "Send summary to owner",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        720,
+        140
+      ]
+    }
+  ],
+  "connections": {
+    "Sunday 18:00": {
+      "main": [
+        [
+          {
+            "node": "Stripe charges 7d",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Stripe refunds 7d",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "GA4 events 7d",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Stripe charges 7d": {
+      "main": [
+        [
+          {
+            "node": "Compute KPIs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Stripe refunds 7d": {
+      "main": [
+        [
+          {
+            "node": "Compute KPIs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GA4 events 7d": {
+      "main": [
+        [
+          {
+            "node": "Compute KPIs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compute KPIs": {
+      "main": [
+        [
+          {
+            "node": "Append to dashboard",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send summary to owner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "notes": "Dashboard sheet 'weekly' columns: date, spend, view_72, lead_72, orders, aov, revenue, refunds. Set WEEKLY_AD_SPEND (or add Google Ads / Meta API nodes) for spend. Compute KPIs reads all three upstream nodes by name, so it runs once after they complete."
+  }
+}

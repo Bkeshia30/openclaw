@@ -1,0 +1,19 @@
+# Optional: copy to .github/workflows/executors-desk-pdfs.yml to rebuild the PDFs on every change to the source HTML.
+name: Build Executor's Desk PDFs
+on:
+  push:
+    paths: ["business/executors-desk/02-product/src/**"]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - run: npm i -D playwright@1.56.1 && npx playwright install --with-deps chromium
+        working-directory: business/executors-desk/02-product
+      - run: node build_pdfs.mjs
+        working-directory: business/executors-desk/02-product
+      - uses: actions/upload-artifact@v4
+        with: { name: executors-desk-pdfs, path: business/executors-desk/02-product/pdf/*.pdf }
