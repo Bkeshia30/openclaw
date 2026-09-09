@@ -19,7 +19,7 @@ Work top to bottom. Nothing on day N depends on anything after it.
 ## Days 3 to 4: funnel
 - [ ] Build the seven funnel steps per `03-funnel/systeme-io-setup.md`
 - [ ] Paste copy from `landing-page-copy.md` and `checkout-bump-upsell-copy.md`; or paste `landing-page.html` into a custom-code block for `/notebook`
-- [ ] Upload the three PDFs as products; set the bump; set the upsell/downsell
+- [ ] Upload the three PDFs as products; set the bump; set the upsell/downsell (Ledger delivered as the Google Sheets copy link)
 - [ ] Create tags; create the automation rules (rule 2 first if on the free plan)
 - [ ] Create the four email campaigns from `04-email/`; import `sequences.json` or paste
 - [ ] Legal pages: privacy, terms, refunds; the "not legal advice" line in every footer
@@ -57,6 +57,6 @@ Work top to bottom. Nothing on day N depends on anything after it.
 - [ ] Weekly report arrives Sunday; from here the system runs and you review a draft article on Mondays
 
 ## Month 2 and after
-- [ ] Build the Estate Ledger sheet and video; switch on the Ledger pitch sequence
+- [ ] Upload the Estate Ledger xlsx to Google Drive as a Sheet, record the video; switch on the Ledger pitch sequence
 - [ ] First State Addendum (Texas, Florida, California or New York, whichever the list asks for most)
 - [ ] Offer the free checklist to three hospice social workers and three funeral homes as a printed handout with the URL

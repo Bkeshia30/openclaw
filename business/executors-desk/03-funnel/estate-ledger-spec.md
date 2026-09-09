@@ -1,5 +1,7 @@
 # Estate Ledger (upsell) — build spec
 
+**Status: built.** `02-product/build_estate_ledger.py` generates `02-product/ledger/The-Estate-Ledger.xlsx` to this spec (six tabs, formulas only, dropdowns, conditional formatting, protected formula cells, three gray example rows per tab). Upload to Google Drive and open as Google Sheets; the walkthrough video is recorded against that copy.
+
 Google Sheets template, one file, five tabs. Buyer receives a "make a copy" link. Build in Sheets, not Excel, so the walkthrough video and the buyer's copy match.
 
 ## Tabs
