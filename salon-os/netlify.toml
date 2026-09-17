@@ -1,10 +1,18 @@
-# Build settings for the salon-os app itself.
+# Build settings for the salon-os app.
 #
-# When Netlify builds from the linked Git repo, the root netlify.toml points
-# `base` here and these settings apply. When the app directory is deployed
-# directly, this file is the whole config.
+# The build command installs its own dependencies with npm, deliberately.
+#
+# This repo's ROOT declares `packageManager: pnpm` and carries a
+# pnpm-workspace.yaml. Netlify reads the package manager from the repository
+# root, not from the base directory, so it installs with pnpm — and salon-os is
+# not one of that workspace's packages, so nothing here gets installed at all.
+# `next build` then runs with no Next.js present and the build dies with a bare
+# "non-zero exit code: 2" that never mentions dependencies.
+#
+# Running `npm ci` here makes the install deterministic whatever Netlify decides
+# to do at the root.
 [build]
-  command = "npm run build"
+  command = "npm ci --no-audit --no-fund && npm run build"
 
 [build.environment]
   NODE_VERSION = "22"
