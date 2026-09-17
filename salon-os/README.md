@@ -3,6 +3,14 @@
 Booking, CRM, payments, funnels, ads and content scheduling on **one spine**:
 `tenant → contact → event`.
 
+**Live at https://salonfrontdesk.netlify.app** — deployed from `main` on every push.
+Supabase project `wunpthrfbxhihsvlhpca` holds the data.
+
+The build needs `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` and nothing
+else: `SUPABASE_SERVICE_ROLE_KEY` is read lazily, at request time, only by the public booking
+page. Without it the site still builds and every owner screen works — `/book/<slug>` is the
+one thing that fails. Verified by building with that variable unset.
+
 Built alongside the 30-day curriculum in [`../founder-os/`](../founder-os/). This directory is
 Days 1–10 of that plan, working and tested.
 
