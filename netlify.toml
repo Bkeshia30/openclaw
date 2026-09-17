@@ -1,17 +1,9 @@
-# Netlify builds the salon-os app in this repo, not the repository root.
+# This repo's root is a different project. This file exists only to send the
+# build into salon-os/, which carries its own netlify.toml with the build
+# command, Node version and the Next.js plugin.
 #
-# The root of this repo is a different project with its own package.json. Without
-# `base`, Netlify would try to build that instead and fail with an error that
-# never mentions the real cause.
+# Deliberately nothing else here: when `base` is set, Netlify merges this file
+# with the one in the base directory, and declaring the same plugin in both
+# fails the build.
 [build]
-  base    = "salon-os"
-  command = "npm run build"
-
-[build.environment]
-  NODE_VERSION = "22"
-
-# Runs the App Router, server actions and the auth middleware on Netlify's
-# runtime. It also decides the publish directory, so this file deliberately
-# does not set one.
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+  base = "salon-os"
