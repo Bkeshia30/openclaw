@@ -46,7 +46,8 @@ def idempotent(sql):
                       "drop policy if exists profile_same_tenant on profiles;\ncreate policy profile_same_tenant on profiles")
     return sql
 
-for f in ["0001_spine.sql", "0002_booking.sql", "0003_rls.sql", "0004_book_appointment.sql"]:
+import os
+for f in sorted(x for x in os.listdir("supabase/migrations") if x.endswith(".sql")):
     body = idempotent(open("supabase/migrations/" + f).read())
     parts.append("-- ---------------------------------------------------------------- " + f + "\n" + body.strip() + "\n")
 
