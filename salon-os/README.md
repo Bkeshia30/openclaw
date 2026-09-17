@@ -43,77 +43,66 @@ Days 1–10 of that plan, working and tested.
 
 ---
 
-## Deploy it (about 45 minutes, mostly waiting on signups)
+## Deploy it
+
+Hosted on Netlify, building from this repo. GitHub stores the code, Supabase holds the
+data, Netlify serves the site — three services, one job each.
 
 ### 1. Supabase
 
-1. Create a project at supabase.com. Wait for it to finish (~2 min).
-2. **Project Settings → API** → copy three values: the Project URL, the `anon public` key,
-   and the `service_role` key. Treat the last one like a house key — it bypasses every
-   security rule in this app. Never paste it into a chat, an issue, or a screenshot.
+Create a project at supabase.com, then run `supabase/install.sql` in its SQL editor.
+That one file creates every table, every security policy, the booking function, your salon,
+your owner account, starter hours and starter services. It is safe to run twice.
 
-### 2. Vercel
+Sign in at your site's `/login` once first — the installer looks for your user and refuses
+with a clear message if you have not.
 
-1. Sign up at vercel.com with GitHub and import this repository.
-2. **Set Root Directory to `salon-os`.** The app lives in a subfolder; skipping this is the
-   single most common reason a first deploy fails with a confusing error.
-3. Add three environment variables:
+From **Settings → API**, you need three values: the Project URL, the `anon public` key, and
+the `service_role` key. The last one bypasses every security rule in this app, so it belongs
+in Netlify's environment variables and nowhere else — never a chat, an issue, or a screenshot.
 
-   | Name | Value |
-   |---|---|
-   | `NEXT_PUBLIC_SUPABASE_URL` | your Project URL |
-   | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | your anon key |
-   | `SUPABASE_SERVICE_ROLE_KEY` | your service_role key |
+### 2. Netlify
 
-4. Deploy, then copy the URL it gives you.
-5. Add `NEXT_PUBLIC_SITE_URL` set to that URL and redeploy. Sign-in links point at this
-   value, so a wrong one emails you a link to localhost.
+**Add new site → Import an existing project → Deploy with GitHub**, then pick this repo.
+Creating an empty site first does not work: Netlify refuses to link a repository to a site
+that has never deployed.
+
+| Setting | Value |
+| --- | --- |
+| Branch to deploy | the branch holding this code |
+| Base directory | `salon-os` |
+| Build command, publish directory | leave empty — `netlify.toml` sets both |
+
+Add the environment variables **before the first build**. Next.js inlines the `NEXT_PUBLIC_`
+ones at build time, so a build without them fails rather than merely misbehaving:
+
+| Name | Value |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | service_role key |
+| `NEXT_PUBLIC_SITE_URL` | your Netlify URL (add after the first deploy, then redeploy) |
+
+Only the public booking page uses `SUPABASE_SERVICE_ROLE_KEY`. Without it the site still
+builds and the owner screens all work; `/book/<slug>` is the only thing that breaks.
 
 ### 3. Point Supabase at the live site
 
-**Authentication → URL Configuration**:
+**Authentication → URL Configuration**: set Site URL to your Netlify URL, and add
+`https://<your-site>/auth/callback` to Redirect URLs. Miss this and the sign-in email lands
+on an error page.
 
-- **Site URL**: your Vercel URL
-- **Redirect URLs**: add `https://your-vercel-url/auth/callback`
+### 4. Make it yours
 
-Miss this and your sign-in link lands on an error page.
+On the site: **Services** → your real services. **Hours** → when you actually work.
+Your booking page is `/book/<your-slug>`, and the header's "View booking page" link goes there.
 
-### 4. Sign in, then install
+### Before you send the link to real clients
 
-1. Open `https://your-vercel-url/login` and sign in with your email. Check spam.
-   Signing in is what creates your user record, which the installer looks for.
-2. Supabase → **SQL Editor** → paste all of `supabase/install.sql` → **Run**.
-
-That one file creates every table, every security policy, the booking function, your salon,
-your owner account, your stylist record, starter hours (Tue–Sat, 9–6) and four starter
-services. Change the salon name on the line marked `CHANGE THIS ONE LINE` if you want;
-everything else is editable on the site afterwards.
-
-It is safe to run twice. If you run it before signing in, it refuses with a clear message
-and you simply run it again after.
-
-3. On the site: **Services** → replace the starter services with your real ones.
-   **Hours** → set when you actually work.
-
-Your booking page is at `https://your-vercel-url/book/<your-slug>` — the installer prints
-the slug when it finishes, and the "View booking page" link in the header goes straight there.
-
-> `install.sql` is generated from `supabase/migrations/` by `scripts/build-install.py`, so the
-> two cannot drift. Developers using `supabase db push` should run the migrations normally and
-> then `supabase/setup.sql` instead.
-
-### 5. Try to break it before your clients do
-
-Book yourself through the public page on your phone. Then check it appears on your Calendar.
-Then block tomorrow on the Hours page and confirm tomorrow disappears from the booking page.
-
-### Before you send this to real clients
-
-- **No deposits are collected yet.** A booking holds your time but costs the client nothing,
-  so no-shows are free for them. Stripe is Day 12 — do it before you promote this widely.
-- **No reminders are sent yet.** You will need to text people yourself until Day 13.
-- **Start A2P 10DLC registration now** (in Twilio) if you want automated texts later.
-  It takes days to weeks to approve, so starting today costs you nothing and saves you a wait.
+- **No deposits are collected yet.** A booking holds your chair but costs the client nothing,
+  so a no-show is free for them. Day 12.
+- **No reminders are sent yet.** You text people yourself until Day 13.
+- **Start A2P 10DLC registration now** if you want automated texts later — days to weeks.
 
 ---
 
