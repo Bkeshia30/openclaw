@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+.env
+.env.local
+.env*.local
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+
+# The parent repo uses pnpm and ignores package-lock.json globally.
+# This project uses npm, so its lockfile must be committed — without it,
+# `npm install` can resolve different versions than the ones these tests passed on.
+!package-lock.json
