@@ -24,48 +24,88 @@ Days 1–10 of that plan, working and tested.
 
 ---
 
-## Setup
+## What works today
 
-**1. Install and configure**
+| Area | State |
+|---|---|
+| Multi-tenant schema with RLS on every table | ✅ tested |
+| Magic-link auth + session refresh | ✅ |
+| Owner calendar: today, upcoming, confirm / done / no-show / cancel | ✅ |
+| Services admin — price, duration, deposit, cleanup buffer | ✅ |
+| Hours admin — weekly hours + blocked days | ✅ |
+| Clients list + detail with an event-driven timeline | ✅ |
+| Public booking page with DST-correct slots and no double-booking | ✅ 27 tests |
+| Deposits taken by card (Stripe) | ⬜ Day 12 — **bookings are unpaid holds until this exists** |
+| SMS/email reminders | ⬜ Day 13 |
+| Automations, funnels, ads, scheduler | ⬜ Days 15–28 |
 
-```bash
-npm install
-cp .env.example .env.local     # then fill in your Supabase keys
-```
+**38 tests, all passing**, including a 20-way concurrency race and a full tenant-isolation suite.
 
-`.env.local` is gitignored. Confirm that before your first commit — a leaked
-`SUPABASE_SERVICE_ROLE_KEY` bypasses every RLS policy in this repo and is a full breach.
+---
 
-**2. Apply the migrations to your Supabase project**
+## Deploy it (about 45 minutes, mostly waiting on signups)
 
-```bash
-supabase link --project-ref <your-ref>
-supabase db push
-```
+### 1. Supabase project
 
-Or paste `supabase/migrations/*.sql` into the SQL editor **in filename order**.
-Do not apply `tests/setup/0000_local_shim.sql` — Supabase already provides everything in it.
+1. Sign up at supabase.com and create a project. Save the database password somewhere.
+2. Wait for it to finish provisioning (~2 min).
+3. **SQL Editor** → paste each file from `supabase/migrations/` **in filename order**
+   (`0001`, `0002`, `0003`, `0004`), running each one before the next.
+   Do **not** run `tests/setup/0000_local_shim.sql` — Supabase already provides what it fakes.
+4. **Project Settings → API** → copy three values:
+   - Project URL
+   - `anon` `public` key
+   - `service_role` key ← treat this like a house key; it bypasses every security rule
 
-**3. Create your tenant and your login**
+### 2. Vercel
 
-```sql
-insert into tenants (name, slug, timezone)
-values ('Your Salon', 'yoursalon', 'America/New_York');
+1. Sign up at vercel.com with GitHub and import this repository.
+2. **Set Root Directory to `salon-os`** — the app lives in a subfolder, and Vercel will
+   fail confusingly if you skip this.
+3. Add three environment variables:
 
--- After signing in once at /login so auth.users has your row:
-insert into profiles (id, tenant_id, role, full_name)
-select u.id, t.id, 'owner', 'Your Name'
-from auth.users u, tenants t
-where u.email = 'you@example.com' and t.slug = 'yoursalon';
-```
+   | Name | Value |
+   |---|---|
+   | `NEXT_PUBLIC_SUPABASE_URL` | your Project URL |
+   | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | your anon key |
+   | `SUPABASE_SERVICE_ROLE_KEY` | your service_role key |
 
-**4. Run it**
+4. Deploy. Copy the URL it gives you (something like `salon-os-xyz.vercel.app`).
+5. Add a fourth variable `NEXT_PUBLIC_SITE_URL` set to that URL, then redeploy.
+   Sign-in links point at this value, so a wrong one emails you a link to localhost.
 
-```bash
-npm run dev        # http://localhost:3000
-```
+### 3. Point Supabase at your live site
 
-Your public booking page is at `/book/yoursalon`.
+In Supabase → **Authentication → URL Configuration**:
+
+- **Site URL**: your Vercel URL
+- **Redirect URLs**: add `https://your-vercel-url/auth/callback`
+
+Miss this and your sign-in link will land on an error page.
+
+### 4. Create your salon
+
+1. Go to `https://your-vercel-url/login` and sign in with your email. Check spam.
+   (Supabase's built-in email sender is rate-limited to a few messages an hour — fine for
+   you, not for customers. Wire up a real email provider before you send client mail.)
+2. Once you are in, open `supabase/setup.sql`, change the five values at the top, and run it
+   in the Supabase SQL editor. It creates your salon, makes you the owner, and gives you
+   starter hours.
+3. Back on the site: **Services** → add what you actually offer. **Hours** → set when you work.
+4. Your booking page is now live at `https://your-vercel-url/book/yourslug`.
+
+### 5. Try to break it before your clients do
+
+Book yourself through the public page on your phone. Then check it appears on your Calendar.
+Then block tomorrow on the Hours page and confirm tomorrow disappears from the booking page.
+
+### Before you send this to real clients
+
+- **No deposits are collected yet.** A booking holds your time but costs the client nothing,
+  so no-shows are free for them. Stripe is Day 12 — do it before you promote this widely.
+- **No reminders are sent yet.** You will need to text people yourself until Day 13.
+- **Start A2P 10DLC registration now** (in Twilio) if you want automated texts later.
+  It takes days to weeks to approve, so starting today costs you nothing and saves you a wait.
 
 ---
 
