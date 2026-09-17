@@ -45,23 +45,18 @@ Days 1–10 of that plan, working and tested.
 
 ## Deploy it (about 45 minutes, mostly waiting on signups)
 
-### 1. Supabase project
+### 1. Supabase
 
-1. Sign up at supabase.com and create a project. Save the database password somewhere.
-2. Wait for it to finish provisioning (~2 min).
-3. **SQL Editor** → paste each file from `supabase/migrations/` **in filename order**
-   (`0001`, `0002`, `0003`, `0004`), running each one before the next.
-   Do **not** run `tests/setup/0000_local_shim.sql` — Supabase already provides what it fakes.
-4. **Project Settings → API** → copy three values:
-   - Project URL
-   - `anon` `public` key
-   - `service_role` key ← treat this like a house key; it bypasses every security rule
+1. Create a project at supabase.com. Wait for it to finish (~2 min).
+2. **Project Settings → API** → copy three values: the Project URL, the `anon public` key,
+   and the `service_role` key. Treat the last one like a house key — it bypasses every
+   security rule in this app. Never paste it into a chat, an issue, or a screenshot.
 
 ### 2. Vercel
 
 1. Sign up at vercel.com with GitHub and import this repository.
-2. **Set Root Directory to `salon-os`** — the app lives in a subfolder, and Vercel will
-   fail confusingly if you skip this.
+2. **Set Root Directory to `salon-os`.** The app lives in a subfolder; skipping this is the
+   single most common reason a first deploy fails with a confusing error.
 3. Add three environment variables:
 
    | Name | Value |
@@ -70,29 +65,42 @@ Days 1–10 of that plan, working and tested.
    | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | your anon key |
    | `SUPABASE_SERVICE_ROLE_KEY` | your service_role key |
 
-4. Deploy. Copy the URL it gives you (something like `salon-os-xyz.vercel.app`).
-5. Add a fourth variable `NEXT_PUBLIC_SITE_URL` set to that URL, then redeploy.
-   Sign-in links point at this value, so a wrong one emails you a link to localhost.
+4. Deploy, then copy the URL it gives you.
+5. Add `NEXT_PUBLIC_SITE_URL` set to that URL and redeploy. Sign-in links point at this
+   value, so a wrong one emails you a link to localhost.
 
-### 3. Point Supabase at your live site
+### 3. Point Supabase at the live site
 
-In Supabase → **Authentication → URL Configuration**:
+**Authentication → URL Configuration**:
 
 - **Site URL**: your Vercel URL
 - **Redirect URLs**: add `https://your-vercel-url/auth/callback`
 
-Miss this and your sign-in link will land on an error page.
+Miss this and your sign-in link lands on an error page.
 
-### 4. Create your salon
+### 4. Sign in, then install
 
-1. Go to `https://your-vercel-url/login` and sign in with your email. Check spam.
-   (Supabase's built-in email sender is rate-limited to a few messages an hour — fine for
-   you, not for customers. Wire up a real email provider before you send client mail.)
-2. Once you are in, open `supabase/setup.sql`, change the five values at the top, and run it
-   in the Supabase SQL editor. It creates your salon, makes you the owner, and gives you
-   starter hours.
-3. Back on the site: **Services** → add what you actually offer. **Hours** → set when you work.
-4. Your booking page is now live at `https://your-vercel-url/book/yourslug`.
+1. Open `https://your-vercel-url/login` and sign in with your email. Check spam.
+   Signing in is what creates your user record, which the installer looks for.
+2. Supabase → **SQL Editor** → paste all of `supabase/install.sql` → **Run**.
+
+That one file creates every table, every security policy, the booking function, your salon,
+your owner account, your stylist record, starter hours (Tue–Sat, 9–6) and four starter
+services. Change the salon name on the line marked `CHANGE THIS ONE LINE` if you want;
+everything else is editable on the site afterwards.
+
+It is safe to run twice. If you run it before signing in, it refuses with a clear message
+and you simply run it again after.
+
+3. On the site: **Services** → replace the starter services with your real ones.
+   **Hours** → set when you actually work.
+
+Your booking page is at `https://your-vercel-url/book/<your-slug>` — the installer prints
+the slug when it finishes, and the "View booking page" link in the header goes straight there.
+
+> `install.sql` is generated from `supabase/migrations/` by `scripts/build-install.py`, so the
+> two cannot drift. Developers using `supabase db push` should run the migrations normally and
+> then `supabase/setup.sql` instead.
 
 ### 5. Try to break it before your clients do
 
